@@ -48,7 +48,7 @@ const Headers = () => {
           </Space>
         </Col>
       </Row>
-      {(xs || (!xs && !sm)) && (
+      {isDrawerMenuOpen && (
         <motion.div initial={{ opacity: 0, y: 100 }} animate={isDrawerMenuOpen ? "open" : "closed"} variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 100 } }}>
           <Menu items={itemMenu} style={{ height: "100vh", paddingTop: 20 }} onClick={(value) => handleMenu(value.key)} />
         </motion.div>

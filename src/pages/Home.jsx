@@ -9,12 +9,20 @@ import { ReactTyped } from "react-typed";
 import { itemProjectHighlight } from "../assets/data/HomeData";
 import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
 
 const Home = () => {
+  // const navigate = useNavigate();
+
+  // const handleMenu = (page) => {
+  //   navigate(`/${page}`);
+  //   console.log(page);
+  // };
+
   const { xs } = useBreakpoint();
   // const colorCard = "#FFFFFF";
   // const colorIcon = "#071952";
@@ -58,9 +66,10 @@ const Home = () => {
                 </Space>
 
                 <Space>
-                  {/* <Button type="primary">Download CV</Button> */}
                   <Link to="/about">
-                    <Button type="primary">About Me</Button>
+                    <Button target="/about" type="primary">
+                      About Me
+                    </Button>
                   </Link>
                 </Space>
               </div>

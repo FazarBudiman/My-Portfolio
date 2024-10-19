@@ -7,6 +7,12 @@ import { FaRegLightbulb } from "react-icons/fa6";
 import { Meta } from "antd/es/list/Item";
 import { itemProjectBackEnd, itemProjectMachineLearning, itemProjectOther, itemTeamOnProjectAqm } from "../assets/data/ProjectData";
 import aqmProjectPicure from "../assets/images/project/aquaculture-mate/logo.png";
+import certificateBangkit from "../assets/images/project/certificate-bangkit.jpg";
+import certificateCloudAWS from "../assets/images/project/certificate-aws_cloud.jpg";
+import certificateBackEnd from "../assets/images/project/certificate-back_end.jpg";
+import certificateFrontEnd from "../assets/images/project/certificate-front_end.jpg";
+import certificateCloudGoogle from "../assets/images/project/certificate-google_cloud.jpg";
+import certificateMachineLearning from "../assets/images/project/certificate-machine_learning.jpg";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -173,75 +179,37 @@ const Project = () => {
                 <div className="masonry-grid">
                   <Image.PreviewGroup>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-bangkit.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBangkit} />}>
                         <Meta title="Bangkit Academy" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-google_cloud.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudGoogle} />}>
                         <Meta title="Cloud-GCP" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-front_end.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateFrontEnd} />}>
                         <Meta title="Front-End" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-aws_cloud.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudAWS} />}>
                         <Meta title="Cloud-AWS" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-machine_learning.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateMachineLearning} />}>
                         <Meta title="Machine Learning" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src="../src/assets/images/project/certificate-back_end.jpg" />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBackEnd} />}>
                         <Meta title="Back-End" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                   </Image.PreviewGroup>
                 </div>
-
-                {/* <Row gutter={[8, 8]} wrap>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-bangkit.jpg" />}>
-                      <Meta title="Bangkit Academy" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-google_cloud.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-aws_cloud.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-aws_cloud.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-aws_cloud.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-aws_cloud.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                  <Col span={8}>
-                    <Card hoverable bordered={false} cover={<img alt="example" src="../src/assets/images/project/certificate-front_end.jpg" />}>
-                      <Meta title="Back-End" />
-                    </Card>
-                  </Col>
-                </Row> */}
               </BentoItem>
             </Col>
           </Row>

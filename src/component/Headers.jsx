@@ -49,7 +49,7 @@ const Headers = () => {
         </Col>
         <Col>
           <Space size="large">
-            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<FaCloudSun />} unCheckedChildren={<IoMdCloudyNight />} />
+            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<IoMdCloudyNight />} unCheckedChildren={<FaCloudSun />} />
           </Space>
         </Col>
       </Row>

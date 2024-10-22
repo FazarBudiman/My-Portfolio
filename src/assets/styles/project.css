@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: end;
   padding: 2rem 1rem;
-  color: #f1f1f1;
 }
 .project-aqm {
   display: flex;
@@ -17,12 +16,19 @@
   align-items: center;
 }
 
+.project-back-end,
+.project-machine-learning,
+.project-other,
+.certification {
+  padding: 1rem;
+}
+
 .ant-list .ant-list-item .ant-list-item-meta {
   align-items: center;
 }
 
 .masonry-grid {
-  column-count: 3; /* Jumlah kolom */
+  /* column-count: 3; Jumlah kolom */
   column-gap: 16px; /* Jarak antar kolom */
   width: 100%;
 }

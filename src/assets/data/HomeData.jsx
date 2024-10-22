@@ -1,7 +1,7 @@
 export const itemProjectHighlight = [
   {
-    title: "Web Profile NitroBoost",
-    descriptions: "This website is built using React JS and Ant Design as UI library.",
+    title: "Web Profile",
+    descriptions: `This website is built using React JS and Ant Design as UI library.`,
     repoLink: "https://github.com/FazarBudiman/Nitroboost-Project",
   },
   {

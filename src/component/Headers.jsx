@@ -1,19 +1,24 @@
-import { Col, Grid, Menu, Row, Space, Switch } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import { motion } from "framer-motion";
+import { itemMenu } from "../assets/data/itemMenu";
+import { Col, Grid, Menu, Row, Space, Switch, theme } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { IoMdCloudyNight } from "react-icons/io";
 import { FaCloudSun } from "react-icons/fa6";
 import { IoClose, IoMenu } from "react-icons/io5";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { itemMenu } from "../assets/data/itemMenu";
-import { useNavigate } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 const Headers = () => {
   const { xs, sm } = useBreakpoint();
   const [isDrawerMenuOpen, setIsDrawerMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { token } = useToken();
+
+  const { toggleTheme } = useTheme();
 
   const handleMenu = (key) => {
     setIsDrawerMenuOpen(!isDrawerMenuOpen);
@@ -30,11 +35,11 @@ const Headers = () => {
             <motion.span style={{ position: "absolute", top: -25 }} initial={{ opacity: 0, y: -25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               {!isDrawerMenuOpen ? (
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} initial={{ opacity: 1 }}>
-                  <IoMenu color="#303030" size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
+                  <IoMenu color={token.colorText} size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
                 </motion.div>
               ) : (
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <IoClose color="#303030" size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
+                  <IoClose color={token.colorText} size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
                 </motion.div>
               )}
             </motion.span>
@@ -44,14 +49,16 @@ const Headers = () => {
         </Col>
         <Col>
           <Space size="large">
-            <Switch defaultChecked checkedChildren={<FaCloudSun />} unCheckedChildren={<IoMdCloudyNight />} />
+            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<FaCloudSun />} unCheckedChildren={<IoMdCloudyNight />} />
           </Space>
         </Col>
       </Row>
-      {isDrawerMenuOpen && (
+      {isDrawerMenuOpen && xs ? (
         <motion.div initial={{ opacity: 0, y: 100 }} animate={isDrawerMenuOpen ? "open" : "closed"} variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 100 } }}>
           <Menu items={itemMenu} style={{ height: "100vh", paddingTop: 20 }} onClick={(value) => handleMenu(value.key)} />
         </motion.div>
+      ) : (
+        <span></span>
       )}
     </Header>
   );

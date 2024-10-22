@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Typography, Grid, Avatar, Tooltip, List, Card, Image } from "antd";
+import { Layout, Row, Col, Typography, Grid, Avatar, Tooltip, List, Card, Image, theme } from "antd";
 import Headers from "../component/Headers";
 import BackgroundAnimation from "../component/BackgroundAnimation";
 import "../assets/styles/project.css";
@@ -17,26 +17,27 @@ import certificateMachineLearning from "../assets/images/project/certificate-mac
 const { Title } = Typography;
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 const Project = () => {
-  const { xs, sm, md, lg } = useBreakpoint();
+  const { xs } = useBreakpoint();
+  const { token } = useToken();
 
-  const colorCard = "#FFFFFF";
-  const colorIcon = "#071952";
-  const colorBorder = "#088999";
+  const colorIcon = token.colorFillSecondary;
 
   return (
     <>
       <Layout>
         <BackgroundAnimation />
         <Headers />
-        <Content style={{ minHeight: "100vh", padding: "14vh 6vw 0vh" }}>
+        <Content className="content">
           <Row justify="start" gutter={[16, 16]}>
             <Col xs={24} sm={24} md={24} lg={24} xl={16} xxl={16}>
               <BentoItem height="100%">
                 <Row gutter={[8, 8]}>
+                  {/* Project Aquaculture Mate */}
                   <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-                    <BentoItem className="project-aqm" height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard }}>
+                    <BentoItem className="project-aqm" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Avatar
                         size={{
                           xs: 100,
@@ -49,10 +50,10 @@ const Project = () => {
                         src={aqmProjectPicure}
                       />
                       <div>
-                        <Title level={2} style={{ color: "#010101", margin: 0, textAlign: "center" }}>
+                        <Title level={2} style={{ color: token.colorText, margin: 0, textAlign: "center" }}>
                           Aquaculture Mate
                         </Title>
-                        <p style={{ textAlign: "center" }}>
+                        <p style={{ textAlign: "center", padding: "1rem 2rem", color: token.colorText }}>
                           This application aims to manage freshwater fish ponds and has implemented machine learning for fish classification. [
                           <a href="https://github.com/C241-PS258" target="_blank" rel="noopener noreferrer">
                             repository
@@ -78,13 +79,15 @@ const Project = () => {
                       </Avatar.Group>
                     </BentoItem>
                   </Col>
-                  <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{ height: (xs || sm || md || lg) && "45vh" }}>
-                    <BentoItem className="project-nitro" height="100%">
+
+                  {/* Project Nitroboost */}
+                  <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
+                    <BentoItem className="project-nitro" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <div>
-                        <Title level={2} style={{ color: "#f1f1f1", textAlign: "center" }}>
+                        <Title level={2} style={{ color: token.colorTextSecondary, textAlign: "center" }}>
                           Web Profile Nitroboost
                         </Title>
-                        <p style={{ textAlign: "center" }}>
+                        <p style={{ textAlign: "center", color: token.colorTextSecondary }}>
                           This{" "}
                           <a href="https://nitroboost.id" target="_blank" rel="noopener noreferrer">
                             website
@@ -99,8 +102,9 @@ const Project = () => {
                     </BentoItem>
                   </Col>
 
+                  {/* Project Back-End */}
                   <Col xs={{ span: 24 }} sm={{ order: 2, span: 14 }} md={8} lg={8} xl={8} xxl={8}>
-                    <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard, padding: "1rem" }}>
+                    <BentoItem className="project-back-end" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Title level={3} style={{ textAlign: "center" }}>
                         Back-End Developer
                       </Title>
@@ -122,8 +126,10 @@ const Project = () => {
                       />
                     </BentoItem>
                   </Col>
+
+                  {/* Project Machine Learning */}
                   <Col xs={{ span: 24 }} sm={{ order: 1, span: 24 }} md={8} lg={8} xl={8} xxl={8}>
-                    <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard, padding: "1rem" }}>
+                    <BentoItem className="project-machine-learning" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Title level={3} style={{ textAlign: "center" }}>
                         Machine Learning
                       </Title>
@@ -145,8 +151,9 @@ const Project = () => {
                       />
                     </BentoItem>
                   </Col>
+                  {/* Project Other */}
                   <Col xs={{ span: 24 }} sm={{ order: 3, span: 10 }} md={8} lg={8} xl={8} xxl={8}>
-                    <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard, padding: "1rem" }}>
+                    <BentoItem className="project-other" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Title level={3} style={{ textAlign: "center" }}>
                         Other
                       </Title>
@@ -171,12 +178,14 @@ const Project = () => {
                 </Row>
               </BentoItem>
             </Col>
+
+            {/* Certification */}
             <Col xs={24} sm={24} md={24} lg={24} xl={8} xxl={8}>
-              <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard, padding: "1rem" }}>
+              <BentoItem className="certification" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                 <Title level={3} style={{ textAlign: "center", marginBottom: "1.5rem" }}>
                   Certification
                 </Title>
-                <div className="masonry-grid">
+                <div className="masonry-grid" style={{ columnCount: `${xs ? 2 : 3}` }}>
                   <Image.PreviewGroup>
                     <div className="masonry-item">
                       <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBangkit} />}>

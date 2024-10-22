@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { Layout, Row, Col, Avatar, Typography, Form, Input, Button, Flex, List, Space, Grid } from "antd";
+import { Layout, Row, Col, Avatar, Typography, Form, Input, Button, Flex, List, Grid, message, theme } from "antd";
 import Headers from "../component/Headers";
 import { FaSquareGithub, FaSquareWhatsapp, FaSquareInstagram, FaLinkedin, FaClipboardCheck } from "react-icons/fa6";
 import { SiGmail, SiGooglecloud, SiJavascript, SiReact, SiTensorflow } from "react-icons/si";
@@ -8,32 +7,90 @@ import BentoItem from "../component/BentoItem";
 import { itemExperience } from "../assets/data/AboutData";
 import profilePicture from "../assets/images/about/profile-picture.jpg";
 import { motion } from "framer-motion";
+import "../assets/styles/about.css";
 
 const { Title } = Typography;
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 const About = () => {
-  const { xs, sm, md, lg, xl } = useBreakpoint();
+  const { xs, sm, md } = useBreakpoint();
+  const { token } = useToken();
 
-  const colorCard = "#FFFFFF";
-  const colorIcon = "#071952";
-  const colorBorder = "#088999";
+  const colorIcon = token.colorFillSecondary;
+
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const validateMessages = {
+    required: "Please input your ${label}",
+    types: {
+      email: "Format ${label} is not relevan",
+    },
+  };
+
+  const onFinish = async (val) => {
+    const api = "https://sheetdb.io/api/v1/ybfmviww4me7c";
+    const date = new Date().toISOString();
+    const { name, email, subject, message } = val;
+
+    try {
+      await fetch(api, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: [
+            {
+              name: name,
+              email: email,
+              subject: subject,
+              message: message,
+              date: date,
+            },
+          ],
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.created !== undefined) {
+            form.resetFields();
+            messageApi.open({
+              type: "success",
+              content: <span className="message-registrasi">Pesan Anda telah berhasil dikirim. Terima kasih!</span>,
+              className: "custom-class",
+            });
+          } else {
+            messageApi.open({
+              type: "error",
+              content: <span className="message-registrasi">Maaf, pesan Anda tidak dapat dikirim. Silakan coba lagi nanti.</span>,
+              className: "custom-class",
+            });
+          }
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
       <Layout>
         <BackgroundAnimation />
         <Headers />
-        <Content style={{ minHeight: "100vh", overflowX: "hidden", padding: "14vh 6vw 0vh" }}>
-          <Row justify="start" align="stretch" gutter={[16, 16]}>
+        <Content className="content">
+          <Row justify="start" gutter={[16, 16]}>
             {/* Kolom Kiri */}
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 14 }} xl={{ span: 14 }} xxl={{ span: 14 }}>
               <BentoItem height="100%">
                 <Row gutter={[16, 16]}>
+                  {/* Profile */}
                   <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
-                    <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard }}>
-                      <Flex gap={"middle"} vertical={(sm && !md) || xs ? true : false} align={(sm && !md) || xs ? "center" : "start"} style={{ borderRadius: "15px", padding: "2rem" }}>
+                    <BentoItem className="about-profile" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
+                      <Flex gap={"middle"} vertical={(sm && !md) || xs ? true : false} align={(sm && !md) || xs ? "center" : "start"} style={{ padding: "2rem" }}>
                         <div>
                           <Avatar
                             size={{
@@ -60,8 +117,10 @@ const About = () => {
                       </Flex>
                     </BentoItem>
                   </Col>
+
+                  {/* Experience */}
                   <Col xs={{ span: 24 }} sm={{ span: 24, order: 3 }} md={{ span: 19, order: 3 }} lg={{ span: 24, order: 3 }} xl={{ span: 19, order: 2 }} xxl={{ span: 20 }}>
-                    <BentoItem height="100%" padding="1rem 2rem 0rem" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard }}>
+                    <BentoItem className="experience" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Title level={2}>Experience</Title>
                       <List
                         itemLayout="horizontal"
@@ -74,15 +133,25 @@ const About = () => {
                       />
                     </BentoItem>
                   </Col>
-                  <Col xs={{ span: 24 }} sm={{ span: 24, order: 2 }} md={{ span: 5, order: 2 }} lg={{ span: 24, order: 2 }} xl={{ span: 5, order: 3 }} xxl={{ span: 4 }} style={{ textAlign: "center" }}>
-                    <BentoItem height="100%" border={`2px solid ${colorBorder}`} padding="1rem 0rem 1rem" style={{ backgroundColor: colorCard }}>
+
+                  {/* Skills */}
+                  <Col xs={{ span: 24 }} sm={{ span: 24, order: 2 }} md={{ span: 5, order: 2 }} lg={{ span: 24, order: 2 }} xl={{ span: 5, order: 3 }} xxl={{ span: 4 }}>
+                    <BentoItem className="skills" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Title level={2}>Skills</Title>
-                      <Flex vertical={(lg && !xl) || (sm && !md) ? false : true} justify="space-evenly" align="center" gap={xl ? "small" : "large"}>
-                        <SiJavascript size={"3rem"} color={colorIcon} />
-                        <SiReact size={"3rem"} color={colorIcon} />
-                        <SiTensorflow size={"3rem"} color={colorIcon} />
-                        <SiGooglecloud size={"3rem"} color={colorIcon} />
-                      </Flex>
+                      <Row gutter={[16, { xs: 16, sm: 16, md: 16, lg: 16, xl: 12, xxl: 10 }]} align={"middle"} justify={"center"}>
+                        <Col xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 24 }} lg={{ span: 12 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
+                          <SiJavascript size={"3rem"} color={colorIcon} />
+                        </Col>
+                        <Col xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 24 }} lg={{ span: 12 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
+                          <SiReact size={"3rem"} color={colorIcon} />
+                        </Col>
+                        <Col xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 24 }} lg={{ span: 12 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
+                          <SiTensorflow size={"3rem"} color={colorIcon} />
+                        </Col>
+                        <Col xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 24 }} lg={{ span: 12 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
+                          <SiGooglecloud size={"3rem"} color={colorIcon} />
+                        </Col>
+                      </Row>
                     </BentoItem>
                   </Col>
                 </Row>
@@ -92,10 +161,11 @@ const About = () => {
             {/* Kolom Kanan */}
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 10 }} xl={{ span: 10 }} xxl={{ span: 10 }}>
               <BentoItem height="100%">
-                <Row gutter={[16, { xs: 16, sm: 16, md: 16, lg: 16, xl: 16 }]}>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                <Row gutter={[8, { xs: 16, sm: 16, md: 16, lg: 12, xl: 16 }]}>
+                  {/* Social Media Group */}
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://www.cloudskillsboost.google/public_profiles/2a5bb05b-c4f1-499a-a112-bffe78205c45" target="_blank" rel="noopener noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -106,9 +176,9 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://www.cloudskillsboost.google/public_profiles/2a5bb05b-c4f1-499a-a112-bffe78205c45" target="_blank" rel="noopener noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -119,9 +189,9 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://linkedin.com/in/fazar-budiman" target="_blank" rel="noopenr noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -132,9 +202,9 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://wa.me/+6281381131455" target="_blank" rel="noopener noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -145,9 +215,9 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://www.instagram.com/fazar.budiman" target="_blank" rel="noopener noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -158,9 +228,9 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
-                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 8 }} xl={{ span: 4 }} style={{ height: "9.5vh" }}>
+                  <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
                     <a href="https://mail.google.com/mail/?view=cm&to=fazarbudiman1907@gmail.com&su=Project&body=" target="_blank" rel="noopener noreferrer">
-                      <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: colorCard }}>
+                      <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover
                           whileTap={{ scale: 0.9 }}
@@ -171,33 +241,73 @@ const About = () => {
                       </BentoItem>
                     </a>
                   </Col>
+
+                  {/* Form Contact Me */}
                   <Col xs={{ span: 24 }} md={{ span: 24 }} span={24}>
-                    <BentoItem height="100%" padding="1rem 2rem" border={`2px solid ${colorBorder}`} style={{ backgroundColor: colorCard }}>
+                    <BentoItem height="100%" className="contact-me" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Flex vertical gap="middle">
                         <Title level={2}>Contact Me</Title>
-                        <Form name="basic" layout="vertical" size="middle">
-                          <Space direction={xs ? "vertical" : "horizontal"}>
-                            <Form.Item label="Your Name" name="username">
-                              <Input />
-                            </Form.Item>
-                            <Form.Item label="Your Email" name="username">
-                              <Input />
-                            </Form.Item>
-                          </Space>
-
-                          <Form.Item label="Subject" name="subject">
+                        {contextHolder}
+                        <Form form={form} name="message" layout="vertical" size="middle" validateMessages={validateMessages} onFinish={(e) => onFinish(e)}>
+                          <Row gutter={[8, 0]}>
+                            <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
+                              <Form.Item
+                                label="Name"
+                                name="name"
+                                required
+                                rules={[
+                                  {
+                                    required: true,
+                                  },
+                                ]}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                            <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
+                              <Form.Item
+                                label="Email"
+                                name="email"
+                                required
+                                rules={[
+                                  {
+                                    required: true,
+                                  },
+                                  {
+                                    type: "email",
+                                  },
+                                ]}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+                          <Form.Item
+                            label="Subject"
+                            name="subject"
+                            required
+                            rules={[
+                              {
+                                required: true,
+                              },
+                            ]}
+                          >
                             <Input />
                           </Form.Item>
-                          <Form.Item label="Message" name="subject">
+                          <Form.Item
+                            label="Message"
+                            name="message"
+                            required
+                            rules={[
+                              {
+                                required: true,
+                              },
+                            ]}
+                          >
                             <Input.TextArea />
                           </Form.Item>
 
-                          <Form.Item
-                            wrapperCol={{
-                              offset: 8,
-                              span: 24,
-                            }}
-                          >
+                          <Form.Item style={{ textAlign: "end", padding: "0.5rem 2rem 0rem" }}>
                             <Button htmlType="submit" type="primary">
                               Send Message
                             </Button>

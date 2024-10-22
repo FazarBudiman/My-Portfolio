@@ -1,11 +1,13 @@
-import { Grid } from "antd";
+import { Grid, theme } from "antd";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 const BackgroundAnimation = () => {
   const { xs, sm, md } = useBreakpoint();
+  const { token } = useToken();
 
   const particlesInit = async (main) => {
     await loadFull(main);
@@ -63,7 +65,7 @@ const BackgroundAnimation = () => {
           line_linked: {
             enable: true,
             distance: 200, // Ubah nilai distance sesuai keinginan Anda
-            color: "#010101", //Ubah warnaaa
+            color: token.colorFillSecondary, //Ubah warnaaa
             opacity: 1,
             width: 2,
           },

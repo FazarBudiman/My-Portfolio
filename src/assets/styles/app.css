@@ -3,3 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.content {
+  min-height: 100vh;
+  padding: 12vh 6vw 3vh;
+}
+
+.ant-menu-horizontal {
+  border-bottom: none;
+}

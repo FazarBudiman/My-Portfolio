@@ -1,0 +1,19 @@
+.experience {
+  padding: 1rem 2rem 0rem;
+}
+
+.skills {
+  padding: 1rem;
+  text-align: center;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.contact-me {
+  padding: 1rem 2rem;
+}

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Avatar, Button, Card, Col, Flex, Grid, Layout, List, Row, Space, Typography } from "antd";
+import { Avatar, Button, Card, Col, Flex, Grid, Layout, List, Row, Space, theme, Typography } from "antd";
 import Headers from "../component/Headers";
 import BackgroundAnimation from "../component/BackgroundAnimation";
 import BentoItem from "../component/BentoItem";
@@ -9,34 +9,26 @@ import { ReactTyped } from "react-typed";
 import { itemProjectHighlight } from "../assets/data/HomeData";
 import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 const Home = () => {
-  // const navigate = useNavigate();
-
-  // const handleMenu = (page) => {
-  //   navigate(`/${page}`);
-  //   console.log(page);
-  // };
-
-  const { xs } = useBreakpoint();
-  // const colorCard = "#FFFFFF";
-  // const colorIcon = "#071952";
-  const colorBorder = "#088999";
+  const { xs, sm } = useBreakpoint();
+  const { token } = useToken();
 
   return (
     <Layout>
       <BackgroundAnimation />
       <Headers />
-      <Content style={{ minHeight: "100vh", padding: "14vh 6vw 0vh" }}>
+      <Content className="content">
         <Row justify="start" gutter={[16, 16]}>
-          <Col xs={24} sm={24} md={8} lg={6} xl={6} xxl={6}>
-            <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: "#fff", display: "flex", justifyContent: "center", alignItems: "center", paddingTop: "1rem" }}>
-              <Flex vertical align="center" gap={"1rem"} justify="center">
+          {/* Profile */}
+          <Col xs={{ order: 2, span: 24 }} sm={{ order: 2, span: 24 }} md={{ order: 1, span: 8 }} lg={{ order: 1, span: 6 }} xl={{ order: 1, span: 6 }} xxl={{ order: 1, span: 6 }}>
+            <BentoItem className="profile" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
+              <Flex vertical align="center" gap="1rem" justify="center">
                 <Avatar
                   size={{
                     xs: 150,
@@ -52,9 +44,11 @@ const Home = () => {
               </Flex>
             </BentoItem>
           </Col>
-          <Col xs={24} sm={24} md={16} lg={18} xl={18} xxl={18}>
-            <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: "#fff" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "end", gap: "2rem", padding: "2rem" }}>
+
+          {/* Statement */}
+          <Col xs={{ order: 3, span: 24 }} sm={{ order: 3, span: 24 }} md={16} lg={18} xl={18} xxl={18}>
+            <BentoItem className="statement" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
+              <div>
                 <Space direction="vertical">
                   <Text keyboard strong>
                     Do What You Feel Necessary
@@ -76,12 +70,13 @@ const Home = () => {
             </BentoItem>
           </Col>
 
-          <Col xs={24} sm={24} md={24} lg={24} xl={16} xxl={16}>
-            <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: "#fff", padding: "2rem 3rem" }}>
+          {/* Project Highlight */}
+          <Col xs={{ order: 4, span: 24 }} sm={{ order: 4, span: 24 }} md={24} lg={24} xl={16} xxl={16}>
+            <BentoItem className="project-highlight" height="100%" style={{ padding: `${xs || sm ? "1rem 1rem" : "1rem 2rem"}`, backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
               <Flex justify="space-between">
                 <Title level={3}>Project</Title>
                 <Link to="/project">
-                  <Button type="text">More Project ...</Button>
+                  <Button type="primary">More Project ...</Button>
                 </Link>
               </Flex>
               <List
@@ -108,25 +103,28 @@ const Home = () => {
               />
             </BentoItem>
           </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={8} xxl={8}>
+
+          {/* Interest and Quotes */}
+          <Col xs={{ order: 1, span: 24 }} sm={{ order: 1, span: 24 }} md={{ order: 4, span: 24 }} lg={24} xl={8} xxl={8}>
             <Row gutter={[8, 8]}>
-              <Col xs={24} sm={24} md={12} lg={12} xl={24} xxl={24}>
-                <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: "#fff", display: "flex", justifyContent: "center", alignItems: "center", padding: "2rem" }}>
-                  <Text keyboard style={{ fontSize: `${xs ? "1.5rem" : "2rem"}` }}>
+              {/* Interest */}
+              <Col xs={{ order: 2, span: 24 }} sm={{ order: 2, span: 24 }} md={12} lg={12} xl={24} xxl={24}>
+                <BentoItem className="interest" height="100%" style={{ padding: `${xs ? "0.5rem" : "2rem"}`, backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
+                  <Text keyboard style={{ fontSize: `${xs ? "1.2rem" : "2rem"}` }}>
                     <ReactTyped strings={["Front-End Developer", "Back-End Developer", "Cloud Computing", "Machine Learning"]} typeSpeed={40} backSpeed={50} loop />
                   </Text>
                 </BentoItem>
               </Col>
-              <Col xs={24} sm={24} md={12} lg={12} xl={24} xxl={24}>
-                <BentoItem height="100%" border={`2px solid ${colorBorder}`} style={{ backgroundColor: "#fff", width: "100%", padding: "2rem", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
+
+              {/* Quotes */}
+              <Col xs={{ order: 1, span: 24 }} sm={{ order: 1, span: 24 }} md={12} lg={12} xl={24} xxl={24}>
+                <BentoItem className="quotes" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                   <Space direction="vertical" size={"middle"}>
                     <Text code strong style={{ fontSize: "1rem" }}>
                       "Failure is part of the process, you don't know where you are vulnerable until you fail"
                     </Text>
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                      <Text mark italic>
-                        --Mr. Elia (Scorpion)--
-                      </Text>
+                      <Text italic>--Mr. Elia (Scorpion)--</Text>
                     </div>
                   </Space>
                 </BentoItem>

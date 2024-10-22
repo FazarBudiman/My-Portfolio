@@ -23,6 +23,7 @@ const Home = () => {
     <Layout>
       <BackgroundAnimation />
       <Headers />
+
       <Content className="content">
         <Row justify="start" gutter={[16, 16]}>
           {/* Profile */}

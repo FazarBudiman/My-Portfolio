@@ -62,7 +62,7 @@ const darkTheme = {
   },
 };
 
-const App = () => {
+const Index = () => {
   const { isDarkMode } = useTheme();
   return (
     <ConfigProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -71,4 +71,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Index;

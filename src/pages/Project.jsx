@@ -13,6 +13,7 @@ import certificateBackEnd from "../assets/images/project/certificate-back_end.jp
 import certificateFrontEnd from "../assets/images/project/certificate-front_end.jpg";
 import certificateCloudGoogle from "../assets/images/project/certificate-google_cloud.jpg";
 import certificateMachineLearning from "../assets/images/project/certificate-machine_learning.jpg";
+import { useState } from "react";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -24,6 +25,11 @@ const Project = () => {
   const { token } = useToken();
 
   const colorIcon = token.colorFillSecondary;
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoaded = () => {
+    setIsLoading(false);
+  };
 
   return (
     <>
@@ -188,32 +194,32 @@ const Project = () => {
                 <div className="masonry-grid" style={{ columnCount: `${xs ? 2 : 3}` }}>
                   <Image.PreviewGroup>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBangkit} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBangkit} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Bangkit Academy" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudGoogle} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudGoogle} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Cloud-GCP" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateFrontEnd} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateFrontEnd} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Front-End" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudAWS} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateCloudAWS} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Cloud-AWS" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateMachineLearning} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateMachineLearning} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Machine Learning" style={{ textAlign: "center" }} />
                       </Card>
                     </div>
                     <div className="masonry-item">
-                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBackEnd} />}>
+                      <Card hoverable bordered={false} cover={<Image alt="example" src={certificateBackEnd} onLoad={handleLoaded} loading="lazy" />} loading={isLoading}>
                         <Meta title="Back-End" style={{ textAlign: "center" }} />
                       </Card>
                     </div>

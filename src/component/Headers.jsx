@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import { itemMenu } from "../assets/data/itemMenu";
 import { Col, Grid, Menu, Row, Space, Switch, theme } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { IoMdCloudyNight } from "react-icons/io";
-import { FaCloudSun } from "react-icons/fa6";
+// import { IoMdCloudyNight } from "react-icons/io";
+// import { FaCloudSun } from "react-icons/fa6";
 import { IoClose, IoMenu } from "react-icons/io5";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const { useBreakpoint } = Grid;
 const { useToken } = theme;
@@ -49,7 +50,7 @@ const Headers = () => {
         </Col>
         <Col>
           <Space size="large">
-            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<IoMdCloudyNight />} unCheckedChildren={<FaCloudSun />} />
+            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<MdDarkMode />} unCheckedChildren={<MdLightMode />} />
           </Space>
         </Col>
       </Row>

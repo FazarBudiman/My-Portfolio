@@ -1,19 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Avatar, Button, Card, Col, Flex, Grid, Layout, List, Row, Space, theme, Typography } from "antd";
+import { Avatar, Button, Card, Col, Flex, Grid, Layout, List, Row, Skeleton, Space, theme, Typography } from "antd";
 import Headers from "../component/Headers";
 import BackgroundAnimation from "../component/BackgroundAnimation";
-import BentoItem from "../component/BentoItem";
+// import BentoItem from "../component/BentoItem";
 import profilePicture from "../assets/images/about/home_profile-picture.jpeg";
 import Title from "antd/es/typography/Title";
 import { ReactTyped } from "react-typed";
 import { itemProjectHighlight } from "../assets/data/HomeData";
 import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 const { Text } = Typography;
 const { Content } = Layout;
 const { useBreakpoint } = Grid;
 const { useToken } = theme;
+const BentoItem = lazy(() => import("../component/BentoItem"));
 
 const Home = () => {
   const { xs, sm } = useBreakpoint();
@@ -23,27 +25,28 @@ const Home = () => {
     <Layout>
       <BackgroundAnimation />
       <Headers />
-
       <Content className="content">
         <Row justify="start" gutter={[16, 16]}>
           {/* Profile */}
           <Col xs={{ order: 2, span: 24 }} sm={{ order: 2, span: 24 }} md={{ order: 1, span: 8 }} lg={{ order: 1, span: 6 }} xl={{ order: 1, span: 6 }} xxl={{ order: 1, span: 6 }}>
-            <BentoItem className="profile" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
-              <Flex vertical align="center" gap="1rem" justify="center">
-                <Avatar
-                  size={{
-                    xs: 150,
-                    sm: 150,
-                    md: 150,
-                    lg: 160,
-                    xl: 160,
-                    xxl: 150,
-                  }}
-                  src={profilePicture}
-                />
-                <Title level={3}>Fazar Budiman</Title>
-              </Flex>
-            </BentoItem>
+            <Suspense fallback={<Skeleton active />}>
+              <BentoItem className="profile" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
+                <Flex vertical align="center" gap="1rem" justify="center">
+                  <Avatar
+                    size={{
+                      xs: 150,
+                      sm: 150,
+                      md: 150,
+                      lg: 160,
+                      xl: 160,
+                      xxl: 150,
+                    }}
+                    src={profilePicture}
+                  />
+                  <Title level={3}>Fazar Budiman</Title>
+                </Flex>
+              </BentoItem>
+            </Suspense>
           </Col>
 
           {/* Statement */}

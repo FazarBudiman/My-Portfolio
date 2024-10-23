@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Avatar, Typography, Form, Input, Button, Flex, List, Grid, message, theme } from "antd";
+import { Layout, Row, Col, Avatar, Typography, Form, Input, Button, Flex, List, Grid, message, theme, Spin } from "antd";
 import Headers from "../component/Headers";
 import { FaSquareGithub, FaSquareWhatsapp, FaSquareInstagram, FaLinkedin, FaClipboardCheck } from "react-icons/fa6";
 import { SiGmail, SiGooglecloud, SiJavascript, SiReact, SiTensorflow } from "react-icons/si";
@@ -8,6 +8,7 @@ import { itemExperience } from "../assets/data/AboutData";
 import profilePicture from "../assets/images/about/profile-picture.jpg";
 import { motion } from "framer-motion";
 import "../assets/styles/about.css";
+import { useState } from "react";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -22,6 +23,7 @@ const About = () => {
 
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
+  const [isSendMessage, setIsSendMessage] = useState(false);
 
   const validateMessages = {
     required: "Please input your ${label}",
@@ -34,7 +36,7 @@ const About = () => {
     const api = "https://sheetdb.io/api/v1/ybfmviww4me7c";
     const date = new Date().toISOString();
     const { name, email, subject, message } = val;
-
+    await setIsSendMessage(true);
     try {
       await fetch(api, {
         method: "POST",
@@ -58,6 +60,7 @@ const About = () => {
         .then((data) => {
           if (data.created !== undefined) {
             form.resetFields();
+            setIsSendMessage(false);
             messageApi.open({
               type: "success",
               content: <span className="message-registrasi">Pesan Anda telah berhasil dikirim. Terima kasih!</span>,
@@ -247,72 +250,74 @@ const About = () => {
                     <BentoItem height="100%" className="contact-me" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                       <Flex vertical gap="middle">
                         <Title level={2}>Contact Me</Title>
-                        {contextHolder}
-                        <Form form={form} name="message" layout="vertical" size="middle" validateMessages={validateMessages} onFinish={(e) => onFinish(e)}>
-                          <Row gutter={[8, 0]}>
-                            <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
-                              <Form.Item
-                                label="Name"
-                                name="name"
-                                required
-                                rules={[
-                                  {
-                                    required: true,
-                                  },
-                                ]}
-                              >
-                                <Input />
-                              </Form.Item>
-                            </Col>
-                            <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
-                              <Form.Item
-                                label="Email"
-                                name="email"
-                                required
-                                rules={[
-                                  {
-                                    required: true,
-                                  },
-                                  {
-                                    type: "email",
-                                  },
-                                ]}
-                              >
-                                <Input />
-                              </Form.Item>
-                            </Col>
-                          </Row>
-                          <Form.Item
-                            label="Subject"
-                            name="subject"
-                            required
-                            rules={[
-                              {
-                                required: true,
-                              },
-                            ]}
-                          >
-                            <Input />
-                          </Form.Item>
-                          <Form.Item
-                            label="Message"
-                            name="message"
-                            required
-                            rules={[
-                              {
-                                required: true,
-                              },
-                            ]}
-                          >
-                            <Input.TextArea />
-                          </Form.Item>
+                        <Spin tip="Sending Message ...." spinning={isSendMessage}>
+                          {contextHolder}
+                          <Form form={form} name="message" layout="vertical" size="middle" validateMessages={validateMessages} onFinish={(e) => onFinish(e)}>
+                            <Row gutter={[8, 0]}>
+                              <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
+                                <Form.Item
+                                  label="Name"
+                                  name="name"
+                                  required
+                                  rules={[
+                                    {
+                                      required: true,
+                                    },
+                                  ]}
+                                >
+                                  <Input />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={12} lg={24} xl={12} xxl={12}>
+                                <Form.Item
+                                  label="Email"
+                                  name="email"
+                                  required
+                                  rules={[
+                                    {
+                                      required: true,
+                                    },
+                                    {
+                                      type: "email",
+                                    },
+                                  ]}
+                                >
+                                  <Input />
+                                </Form.Item>
+                              </Col>
+                            </Row>
+                            <Form.Item
+                              label="Subject"
+                              name="subject"
+                              required
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                              ]}
+                            >
+                              <Input />
+                            </Form.Item>
+                            <Form.Item
+                              label="Message"
+                              name="message"
+                              required
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                              ]}
+                            >
+                              <Input.TextArea />
+                            </Form.Item>
 
-                          <Form.Item style={{ textAlign: "end", padding: "0.5rem 2rem 0rem" }}>
-                            <Button htmlType="submit" type="primary">
-                              Send Message
-                            </Button>
-                          </Form.Item>
-                        </Form>
+                            <Form.Item style={{ textAlign: "end", padding: "0.5rem 2rem 0rem" }}>
+                              <Button htmlType="submit" type="primary">
+                                Send Message
+                              </Button>
+                            </Form.Item>
+                          </Form>
+                        </Spin>
                       </Flex>
                     </BentoItem>
                   </Col>

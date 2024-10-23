@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 import { itemMenu } from "../assets/data/itemMenu";
-import { Col, Grid, Menu, Row, Space, Switch, theme } from "antd";
+import { Button, Col, Grid, Menu, Row, theme } from "antd";
 import { Header } from "antd/es/layout/layout";
-// import { IoMdCloudyNight } from "react-icons/io";
-// import { FaCloudSun } from "react-icons/fa6";
 import { IoClose, IoMenu } from "react-icons/io5";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
 const { useBreakpoint } = Grid;
 const { useToken } = theme;
@@ -19,7 +17,7 @@ const Headers = () => {
   const navigate = useNavigate();
   const { token } = useToken();
 
-  const { toggleTheme } = useTheme();
+  const { toggleTheme, isDarkMode } = useTheme();
 
   const handleMenu = (key) => {
     setIsDrawerMenuOpen(!isDrawerMenuOpen);
@@ -30,17 +28,17 @@ const Headers = () => {
 
   return (
     <Header style={{ position: "fixed", width: "100%", zIndex: 2 }}>
-      <Row align={"middle"}>
+      <Row align={"middle"} style={{ height: "100%", padding: "0rem 1rem" }}>
         <Col xs={{ offset: 1, span: 19 }} sm={{ offset: 1, span: 20 }} md={{ offset: 2, span: 18 }} lg={{ offset: 3, span: 16 }} xl={{ offset: 3, span: 16 }}>
           {xs || (!xs && !sm) ? (
             <motion.span style={{ position: "absolute", top: -25 }} initial={{ opacity: 0, y: -25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               {!isDrawerMenuOpen ? (
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} initial={{ opacity: 1 }}>
-                  <IoMenu color={token.colorText} size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
+                  <IoMenu color={token.colorText} size={"1.5rem"} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
                 </motion.div>
               ) : (
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <IoClose color={token.colorText} size={24} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
+                  <IoClose color={token.colorText} size={"1.5rem"} onClick={() => setIsDrawerMenuOpen(!isDrawerMenuOpen)} />
                 </motion.div>
               )}
             </motion.span>
@@ -49,9 +47,7 @@ const Headers = () => {
           )}
         </Col>
         <Col>
-          <Space size="large">
-            <Switch defaultChecked onChange={toggleTheme} checkedChildren={<MdDarkMode />} unCheckedChildren={<MdLightMode />} />
-          </Space>
+          <Button type="default" onClick={toggleTheme} icon={isDarkMode ? <RiSunFill size={"1.3rem"} /> : <RiMoonClearFill size={"1.3rem"} />} size="middle" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} />
         </Col>
       </Row>
       {isDrawerMenuOpen && xs ? (

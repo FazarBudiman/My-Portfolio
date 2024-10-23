@@ -164,7 +164,7 @@ const About = () => {
                 <Row gutter={[8, { xs: 16, sm: 16, md: 16, lg: 12, xl: 16 }]}>
                   {/* Social Media Group */}
                   <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
-                    <a href="https://www.cloudskillsboost.google/public_profiles/2a5bb05b-c4f1-499a-a112-bffe78205c45" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/FazarBudiman" target="_blank" rel="noopener noreferrer">
                       <BentoItem className="social-media" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                         <motion.div
                           whileHover={{ scale: 1.1 }} // Membesar saat hover

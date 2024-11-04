@@ -47,7 +47,7 @@ const Headers = () => {
           )}
         </Col>
         <Col>
-          <Button type="default" onClick={toggleTheme} icon={isDarkMode ? <RiSunFill size={"1.3rem"} /> : <RiMoonClearFill size={"1.3rem"} />} size="middle" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} />
+          <Button type="default" onClick={toggleTheme} icon={isDarkMode ? <RiSunFill size={"1.2rem"} /> : <RiMoonClearFill size={"1.2rem"} />} size="middle" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} />
         </Col>
       </Row>
       {isDrawerMenuOpen && xs ? (

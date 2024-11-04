@@ -5,7 +5,7 @@ import { SiGmail, SiGooglecloud, SiJavascript, SiReact, SiTensorflow } from "rea
 import BackgroundAnimation from "../component/BackgroundAnimation";
 import BentoItem from "../component/BentoItem";
 import { itemExperience } from "../assets/data/AboutData";
-import profilePicture from "../assets/images/about/profile-picture.jpg";
+import profilePicture from "../assets/images/about/profile-picture.webp";
 import { motion } from "framer-motion";
 import "../assets/styles/about.css";
 import { useState } from "react";
@@ -88,7 +88,6 @@ const About = () => {
           <Row justify="start" gutter={[16, 16]}>
             {/* Kolom Kiri */}
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 14 }} xl={{ span: 14 }} xxl={{ span: 14 }}>
-              <BentoItem height="100%">
                 <Row gutter={[16, 16]}>
                   {/* Profile */}
                   <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }} xl={{ span: 24 }} xxl={{ span: 24 }}>
@@ -158,12 +157,10 @@ const About = () => {
                     </BentoItem>
                   </Col>
                 </Row>
-              </BentoItem>
             </Col>
 
             {/* Kolom Kanan */}
             <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 10 }} xl={{ span: 10 }} xxl={{ span: 10 }}>
-              <BentoItem height="100%">
                 <Row gutter={[8, { xs: 16, sm: 16, md: 16, lg: 12, xl: 16 }]}>
                   {/* Social Media Group */}
                   <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 12 }} xl={{ span: 4 }}>
@@ -322,7 +319,6 @@ const About = () => {
                     </BentoItem>
                   </Col>
                 </Row>
-              </BentoItem>
             </Col>
           </Row>
         </Content>

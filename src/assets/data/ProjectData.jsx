@@ -43,13 +43,13 @@ export const itemProjectOther = [
   },
 ];
 
-import hilmiPicture from "../images/project/aquaculture-mate/hilmi.jpg";
-import rifqyPicture from "../images/project/aquaculture-mate/rifqy.jpg";
-import alifiaPicture from "../images/project/aquaculture-mate/alifia.jpg";
-import andiPicture from "../images/project/aquaculture-mate/andi.jpg";
-import reyPicture from "../images/project/aquaculture-mate/rey.jpg";
-import kemalPicture from "../images/project/aquaculture-mate/kemal.jpg";
-import fazarPicture from "../images/project/aquaculture-mate/fazar.jpg";
+import hilmiPicture from "../images/project/aquaculture-mate/hilmi.webp";
+import rifqyPicture from "../images/project/aquaculture-mate/rifqy.webp";
+import alifiaPicture from "../images/project/aquaculture-mate/alifia.webp";
+import andiPicture from "../images/project/aquaculture-mate/andi.webp";
+import reyPicture from "../images/project/aquaculture-mate/rey.webp";
+import kemalPicture from "../images/project/aquaculture-mate/kemal.webp";
+import fazarPicture from "../images/project/aquaculture-mate/fazar.webp";
 
 export const itemTeamOnProjectAqm = [
   {

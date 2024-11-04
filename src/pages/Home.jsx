@@ -2,8 +2,7 @@
 import { Avatar, Button, Card, Col, Flex, Grid, Layout, List, Row, Skeleton, Space, theme, Typography } from "antd";
 import Headers from "../component/Headers";
 import BackgroundAnimation from "../component/BackgroundAnimation";
-// import BentoItem from "../component/BentoItem";
-import profilePicture from "../assets/images/about/home_profile-picture.jpeg";
+import profilePicture from "../assets/images/about/home_profile-picture.webp";
 import Title from "antd/es/typography/Title";
 import { ReactTyped } from "react-typed";
 import { itemProjectHighlight } from "../assets/data/HomeData";

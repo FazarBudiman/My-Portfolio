@@ -28,7 +28,6 @@
 }
 
 .masonry-grid {
-  /* column-count: 3; Jumlah kolom */
   column-gap: 16px; /* Jarak antar kolom */
   width: 100%;
 }

@@ -27,7 +27,7 @@ const Home = () => {
       <Content className="content">
         <Row justify="start" gutter={[16, 16]}>
           {/* Profile */}
-          <Col xs={{ order: 2, span: 24 }} sm={{ order: 2, span: 24 }} md={{ order: 1, span: 8 }} lg={{ order: 1, span: 6 }} xl={{ order: 1, span: 6 }} xxl={{ order: 1, span: 6 }}>
+          <Col xs={{ order: 2, span: 16 }} sm={{ order: 2, span: 24 }} md={{ order: 1, span: 8 }} lg={{ order: 2, span: 6 }} xl={{ order: 2, span: 6 }} xxl={{ order: 1, span: 6 }}>
             <Suspense fallback={<Skeleton active />}>
               <BentoItem className="profile" height="100%" style={{ backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
                 <Flex vertical align="center" gap="1rem" justify="center">
@@ -74,7 +74,7 @@ const Home = () => {
           </Col>
 
           {/* Project Highlight */}
-          <Col xs={{ order: 4, span: 24 }} sm={{ order: 4, span: 24 }} md={24} lg={24} xl={16} xxl={16}>
+          <Col xs={{ order: 1, span: 12 }} sm={{ order: 4, span: 24 }} md={24} lg={24} xl={16} xxl={16}>
             <BentoItem className="project-highlight" height="100%" style={{ padding: `${xs || sm ? "1rem 1rem" : "1rem 2rem"}`, backgroundColor: token.colorPrimaryBg, border: `2px solid ${token.colorPrimaryBorder}` }}>
               <Flex justify="space-between">
                 <Title level={3}>Project</Title>
@@ -108,7 +108,7 @@ const Home = () => {
           </Col>
 
           {/* Interest and Quotes */}
-          <Col xs={{ order: 1, span: 24 }} sm={{ order: 1, span: 24 }} md={{ order: 4, span: 24 }} lg={24} xl={8} xxl={8}>
+          <Col xs={{ order: 4, span: 24 }} sm={{ order: 1, span: 24 }} md={{ order: 4, span: 24 }} lg={24} xl={8} xxl={8}>
             <Row gutter={[8, 8]}>
               {/* Interest */}
               <Col xs={{ order: 2, span: 24 }} sm={{ order: 2, span: 24 }} md={12} lg={12} xl={24} xxl={24}>
